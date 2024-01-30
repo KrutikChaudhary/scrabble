@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-
+#include <stdbool.h>
 
 int main() {
     //board size input
@@ -16,7 +16,7 @@ int main() {
             board[i][j]='.';
         }
     }
-    //number of words
+    //number of words input
     int words;
     scanf("%d",&words);
 
@@ -30,7 +30,30 @@ int main() {
         //if horizontal word placement
         if(d=='H'){
             int charCount = 0;
+
+            //determine validity
+            bool valid = false;
+            if(i>0){
+                //find if word is valid to be placed
+                for(int j = x; j<x+strlen(s); j++){
+                    //check if character is same (are crossing each other)
+                    if(board[y][j]!='.' && board[y][j]==s[charCount]){
+                        valid = true;
+                        break;
+                    }
+                    charCount++;
+                }
+            }else{
+                valid = true;
+            }
+
+            //check if crossing edge
+            if((x+strlen(s)-1)>=n || valid==0){
+                printf("Invalid word placement: (%d,%d) %c, %s\n", y,x,d,s);
+                continue;
+            }
             //move horizontally and place each character separately
+            charCount=0;
             for(int j = x; j<x+strlen(s); j++){
                 board[y][j]=s[charCount++];
             }
@@ -38,6 +61,28 @@ int main() {
         //if vertical word placement
         else if(d=='V'){
             int charCount = 0;
+            bool valid = false;
+            if(i>0){
+                //find if word is valid to be placed
+                for(int j = y; j<y+strlen(s); j++){
+                    //check if character is same (are crossing each other)
+                    if(board[j][x]!='.' && board[j][x]==s[charCount]){
+                        valid = true;
+                        break;
+                    }
+                    charCount++;
+                }
+
+            }else{
+                valid = true;
+            }
+
+            //check if crossing edge
+            if((y+strlen(s)-1)>=n || valid == 0){
+                printf("Invalid word placement: (%d,%d) %c, %s\n", y,x,d,s);
+                continue;
+            }
+            charCount = 0;
             //move vertically and place each character separately
             for(int j = y; j<y+strlen(s); j++){
                 board[j][x]=s[charCount++];
