@@ -111,7 +111,7 @@ int main() {
                 if(board[j][k]==L){
 
                     //check vertical
-                    if(j-B>=0 && j+A<=n){
+                    if(j-B>=0 && j+A<n){
                         bool canPlace = true;
                         for(int checker=j-B; checker<=j+A; checker++){
                             if(checker==j){
@@ -128,7 +128,7 @@ int main() {
                     }
 
                     //check horizontal
-                    if(k-B>=0 && k+A<=n){
+                    if(k-B>=0 && k+A<n){
                         bool canPlace = true;
                         for(int checker=k-B; checker<=k+A; checker++){
                             if(checker==k){
