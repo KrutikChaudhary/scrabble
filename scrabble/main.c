@@ -49,7 +49,7 @@ int main() {
 
             //check if crossing edge
             if((x+strlen(s)-1)>=n || valid==0){
-                printf("Invalid word placement: (%d,%d) %c, %s\n", y,x,d,s);
+                printf("Invalid word placement: (%d,%d) %c, %s\n", x,y,d,s);
                 continue;
             }
             //move horizontally and place each character separately
@@ -79,7 +79,7 @@ int main() {
 
             //check if crossing edge
             if((y+strlen(s)-1)>=n || valid == 0){
-                printf("Invalid word placement: (%d,%d) %c, %s\n", y,x,d,s);
+                printf("Invalid word placement: (%d,%d) %c, %s\n", x,y,d,s);
                 continue;
             }
             charCount = 0;
