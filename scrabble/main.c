@@ -89,8 +89,6 @@ int main() {
             }
         }
     }
-    int f;
-    scanf("%d", &f);
 
     //output
     for(int i = 0; i < n ; i++){
@@ -98,6 +96,57 @@ int main() {
             printf("%c", board[i][j]);
         }
         printf("\n");
+    }
+    int f;
+    scanf("%d", &f);
+
+    for(int i=0; i<f; i++){
+        int B; int A;
+        char L;
+
+        scanf("%d %c %d", &B, &L ,&A );
+
+        for(int j = 0; j < n ; j++){
+            for (int k = 0; k < n ; k++) {
+                if(board[j][k]==L){
+
+                    //check vertical
+                    if(j-B>=0 && j+A<=n){
+                        bool canPlace = true;
+                        for(int checker=j-B; checker<=j+A; checker++){
+                            if(checker==j){
+                                continue; //avoid checking where char is present
+                            }
+                            if(board[checker][k]!='.'){
+                                canPlace = false; break;
+                            }
+                        }
+                        //print
+                        if(canPlace==1){
+                            printf("Place vertically at (%d,%d)\n",k,j);
+                        }
+                    }
+
+                    //check horizontal
+                    if(k-B>=0 && k+A<=n){
+                        bool canPlace = true;
+                        for(int checker=k-B; checker<=k+A; checker++){
+                            if(checker==k){
+                                continue; //avoid checking where char is present
+                            }
+                            if(board[j][checker]!='.'){
+                                canPlace=false; break;
+                            }
+                        }
+                        //print
+                        if(canPlace==1){
+                            printf("Place horizontally at (%d,%d)\n", k, j);
+                        }
+                    }
+                }
+            }
+        }
+
     }
     return 0;
 }
